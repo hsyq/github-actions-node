@@ -6,7 +6,7 @@ on:
 
 jobs:
   main:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       # 下载源码
       - name: Checkout
@@ -28,6 +28,7 @@ jobs:
           TARGET: /www/github-action-node
           EXCLUDE: "node_modules"
       - run: |
+          pwd
           cd /www/github-action-node
           mkdir 666
           pnpm i
