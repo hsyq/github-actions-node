@@ -6,30 +6,28 @@ on:
 
 jobs:
   main:
-    runs-on: self-hosted
+    # self-hosted
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [15.9.0] #指定node版本
     steps:
       # 下载源码
       - name: Checkout
         uses: actions/checkout@v2
 
       - name: Deploy to Server
-        uses: easingthemes/ssh-deploy@v2.1.5
-        env:
-          # SSH密钥对的私钥部分。公钥部分应添加到接收部署的服务器上的授权密钥文件中。
-          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
-          ARGS: "-rltgoDzvO --delete"
-          # 要拷贝到云服务器的文件路径,相对于GITHUB_WORKSPACE
-          SOURCE: ""
-          # 云服务器公网地址
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          # 云服务器的用户名
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          # 将文件拷贝至/www/github-action-node目录，不存在会自动创建。默认为default '/home/REMOTE_USER/'
-          TARGET: /www/github-action-node
-          EXCLUDE: "node_modules"
-      - run: |
-          pwd
-          cd /www/github-action-node
-          mkdir 666
-          pnpm i
-          pm2 start
+        uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          user: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          connect_timeout: 10s
+          first_ssh: |
+            pwd
+          scp: |
+            '' => /www/github-action-node
+          last_ssh: |
+            cd /www/github-action-node
+            pnpm i
+            pm2 start

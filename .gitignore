@@ -2,6 +2,10 @@ logs
 
 *.log
 
+.vscode
+
+bak/
+
 npm-debug.log*
 
 yarn-debug.log*
