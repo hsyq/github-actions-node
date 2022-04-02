@@ -1,0 +1,23 @@
+name: Nodejs App
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      # 下载源码
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Deploy to Server
+        uses: easingthemes/ssh-deploy@v2.1.5
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "" # 这是要复制到阿里云服务器的文件夹名称,相对于GITHUB_WORKSPACE
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }} # 你的阿里云公网地址
+          REMOTE_USER: ${{ secrets.REMOTE_USER }} # 阿里云登录后默认为 root 用户，并且所在文件夹为 root
+          TARGET: /www/github-action-node # 打包后的 dist 文件夹将放在 /www/github-action-node
