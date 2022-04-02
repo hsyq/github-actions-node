@@ -29,5 +29,6 @@ jobs:
           EXCLUDE: "node_modules"
       - run: |
           cd /www/github-action-node
+          mkdir 666
           pnpm i
           pm2 start
