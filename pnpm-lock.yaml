@@ -4,11 +4,13 @@ specifiers:
   '@koa/router': ^10.1.1
   koa: ^2.13.4
   koa-body: ^4.2.0
+  mime-types: ^2.1.35
 
 dependencies:
   '@koa/router': registry.npmmirror.com/@koa/router/10.1.1
   koa: registry.npmmirror.com/koa/2.13.4
   koa-body: registry.npmmirror.com/koa-body/4.2.0
+  mime-types: registry.npmmirror.com/mime-types/2.1.35
 
 packages:
 
