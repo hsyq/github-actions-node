@@ -28,5 +28,6 @@ jobs:
           TARGET: /www/github-action-node
           EXCLUDE: "node_modules"
       - run: |
+          cd /www/github-action-node
           pnpm i
           pm2 start
