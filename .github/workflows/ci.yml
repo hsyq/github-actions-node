@@ -12,7 +12,6 @@ jobs:
       matrix:
         node-version: [15.9.0] #指定node版本
     steps:
-      # 下载源码
       - name: Checkout
         uses: actions/checkout@v2
 

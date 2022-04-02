@@ -1,5 +1,3 @@
-const path = require('path')
-
 module.exports = {
   apps: [{
     name: "github-actions-node",
@@ -10,8 +8,6 @@ module.exports = {
       "public",
       'logs'
     ],
-    // err_file: '/pm2/logs/', 
-    // out_file: "./logs/access.log" 
     log_date_format: 'YYYY-MM-DD HH:mm:ss',
     exec_mode: 'cluster',
     instances: 0,

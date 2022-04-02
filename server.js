@@ -1,11 +1,8 @@
 const Koa = require('koa')
 const Router = require('@koa/router')
-const body = require('koa-body')
 
 const app = new Koa()
 const router = new Router()
-
-app.use(body())
 
 const PORT = process.env.PORT || 3003
 
@@ -13,13 +10,12 @@ app.use(async (ctx, next) => {
   const start = new Date()
 
   await next()
-
   const end = new Date() - start
   console.log((`${ctx.method} ${ctx.url} - ${end}ms`))
 })
 
 router.get('/', async (ctx) => {
-  ctx.body = '欢迎访问 昆吾'
+  ctx.body = '欢迎访问'
 })
 
 router.get('/user', async ctx => {
@@ -28,7 +24,7 @@ router.get('/user', async ctx => {
     msg: 'ok',
     data: [{
       id: '1',
-      name: '昆吾'
+      name: 'Jack'
     }]
   }
 })
