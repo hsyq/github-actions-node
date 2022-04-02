@@ -26,7 +26,7 @@ jobs:
           first_ssh: |
             pwd
           scp: |
-            '' => /www/github-action-node
+            ./* => /www/github-action-node
           last_ssh: |
             cd /www/github-action-node
             pnpm i
