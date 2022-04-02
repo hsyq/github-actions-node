@@ -19,14 +19,14 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
           # 要拷贝到云服务器的文件路径,相对于GITHUB_WORKSPACE
-          SOURCE: "" 
+          SOURCE: ""
           # 云服务器公网地址
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           # 云服务器的用户名
-          REMOTE_USER: ${{ secrets.REMOTE_USER }} 
+          REMOTE_USER: ${{ secrets.REMOTE_USER }}
           # 将文件拷贝至/www/github-action-node目录，不存在会自动创建。默认为default '/home/REMOTE_USER/'
-          TARGET: /www/github-action-node 
-          EXCLUDE: 'node_modules'
+          TARGET: /www/github-action-node
+          EXCLUDE: "node_modules"
       - run: |
-        pnpm i
-        pm2 start ecosystem.config.js      
+          pnpm i
+          pm2 start
