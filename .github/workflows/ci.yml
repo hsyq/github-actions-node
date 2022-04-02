@@ -15,9 +15,19 @@ jobs:
       - name: Deploy to Server
         uses: easingthemes/ssh-deploy@v2.1.5
         env:
+          # SSH密钥对的私钥部分。公钥部分应添加到接收部署的服务器上的授权密钥文件中。
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_SSH_KEY }}
           ARGS: "-rltgoDzvO --delete"
-          SOURCE: "" # 这是要复制到阿里云服务器的文件夹名称,相对于GITHUB_WORKSPACE
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }} # 你的阿里云公网地址
-          REMOTE_USER: ${{ secrets.REMOTE_USER }} # 阿里云登录后默认为 root 用户，并且所在文件夹为 root
-          TARGET: /www/github-action-node # 打包后的 dist 文件夹将放在 /www/github-action-node
+          # 要拷贝到云服务器的文件路径,相对于GITHUB_WORKSPACE
+          SOURCE: "" 
+          # 云服务器公网地址
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }} 
+          # 云服务器的用户名
+          REMOTE_USER: ${{ secrets.REMOTE_USER }} 
+          # 将文件拷贝至/www/github-action-node目录，不存在会自动创建。默认为default '/home/REMOTE_USER/'
+          TARGET: /www/github-action-node 
+          EXCLUDE: 'node_modules'
+      - run: |
+        pnpm i
+        pm2 start ecosystem.config.js
+        pm2 save        
