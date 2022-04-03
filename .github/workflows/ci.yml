@@ -21,7 +21,8 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           user: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
-          connect_timeout: 20s
+          # 由于网路情况，很容易超时，设置为60s
+          connect_timeout: 60s
           scp: |
             ./* => /www/github-action-node
           last_ssh: |
