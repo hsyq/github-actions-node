@@ -22,8 +22,8 @@ jobs:
           # 由于网路情况，很容易超时，设置为60s
           connect_timeout: 60s
           scp: |
-            ./* => /www/github-action-node
+            ./* => ${{ secrets.TARGET_DIR }}
           last_ssh: |
-            cd ${{ secrets.TARGET_DIR }}
+            cd /www/github-action-node
             pnpm i
             pm2 start
