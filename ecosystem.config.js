@@ -10,7 +10,7 @@ module.exports = {
     ],
     log_date_format: 'YYYY-MM-DD HH:mm:ss',
     exec_mode: 'cluster',
-    instances: 0,
+    instances: 2,
     env: {
       NODE_ENV: "production",
       PORT: 3003
