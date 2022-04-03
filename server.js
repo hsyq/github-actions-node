@@ -19,11 +19,12 @@ log4js.configure({
       filename: 'logs/access.log',
       pattern: 'yyyy-MM-dd',
       alwaysIncludePattern: true,
-      // 传递给streamroller的参数
-      keepFileExt: true,
-      fileNameSep: '_', // 文件名分隔符，默认是'.'
       maxLogSize: 10 * 1024 * 1024, // 文件最大存储空间，默认是10M
       backups: 1, // 最多保留10个文件
+      // 传递给streamroller的参数
+      // 对于备份文件是否保存文件后缀，默认为false
+      keepFileExt: true,
+      fileNameSep: '_', // 文件名分隔符，默认是'.'
     },
   },
 
